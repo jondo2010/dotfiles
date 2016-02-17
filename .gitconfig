@@ -1,0 +1,48 @@
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[user]
+    name = John Hughes
+    email = JoHughes@teslamotors.com
+[alias]
+    co = checkout
+[apply]
+    whitespace = nowarn
+[core]
+    editor = vim
+	autocrlf = input
+    preloadindex = true
+    fscache = true
+[gc]
+    auto = 256
+[rerere]
+    enabled = true
+[push]
+    default = tracking
+[branch]
+    autosetupmerge = true
+[advice]
+    pushNonFastForward = false
+    statusHints = false
+[pager]
+    color = true
+    #show = vim -c '%sm/\\e.\\{-}m//g' -c 'set ft=diff' +1 -
+[merge]
+	tool = kdiff3
+[diff]
+	tool = kdiff3
