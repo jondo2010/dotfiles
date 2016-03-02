@@ -25,9 +25,9 @@
     whitespace = nowarn
 [core]
     editor = vim
-	autocrlf = input
     preloadindex = true
     fscache = true
+	excludesfile = /Users/johughes/.gitignore_global
 [gc]
     auto = 256
 [rerere]
@@ -46,3 +46,9 @@
 	tool = kdiff3
 [diff]
 	tool = kdiff3
+[difftool "sourcetree"]
+	cmd = /usr/local/Cellar/kdiff3/0.9.98/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /usr/local/Cellar/kdiff3/0.9.98/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	trustExitCode = true

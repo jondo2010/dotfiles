@@ -4,6 +4,9 @@ set nocompatible
 " Enable modelines
 set modeline
 
+" Enable mouse
+set mouse=a
+
 " Load the Vundle bundles.
 source $HOME/.vundles.vim
 
@@ -21,6 +24,8 @@ set history=1000
 set undolevels=1000
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set title
+
+set clipboard=unnamed
 
 " Make the backspace key work like it ought to.
 set backspace=indent,eol,start
@@ -234,3 +239,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " Don't autofold code
 let g:pymode_folding = 0
 
+" Easy vim splits bindings
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l

@@ -34,3 +34,8 @@ Plugin 'tpope/vim-unimpaired'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 Bundle 'vim-scripts/AnsiEsc'
+
+Plugin 'christoomey/vim-tmux-navigator'
+
+Plugin 'Valloric/YouCompleteMe'
+
