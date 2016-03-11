@@ -244,3 +244,12 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" YouCompleteMe bindings
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR> 
+"nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <F3> :YcmCompleter GoTo<CR>
+
+" YouCompleteMe settings
+let g:ycm_confirm_extra_conf = 0    " Don't ask to load the .ycm_extra_conf.py
+

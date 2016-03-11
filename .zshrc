@@ -86,3 +86,7 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ls='ls -GpF --color=auto'
 
+# Turn off shared history
+unsetopt share_history
+setopt no_share_history
+
