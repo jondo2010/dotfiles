@@ -18,16 +18,13 @@
     untracked = cyan
 [user]
     name = John Hughes
-    email = JoHughes@teslamotors.com
-[alias]
-    co = checkout
+    email = john.hughes@aid-driving.eu
 [apply]
     whitespace = nowarn
 [core]
     editor = vim
     preloadindex = true
     fscache = true
-	excludesfile = /Users/johughes/.gitignore_global
 [gc]
     auto = 256
 [rerere]
@@ -47,10 +44,9 @@
 [diff]
 	tool = kdiff3
 [difftool "sourcetree"]
-	cmd = /usr/local/Cellar/kdiff3/0.9.98/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
-	path = 
+	cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
 [mergetool "sourcetree"]
-	cmd = /usr/local/Cellar/kdiff3/0.9.98/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	cmd = kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
 	trustExitCode = true
 [alias]
     top = log --oneline --graph --decorate @{u}..
