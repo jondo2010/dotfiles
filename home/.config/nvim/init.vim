@@ -25,6 +25,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vimwiki/vimwiki'
 "Plug 'galooshi/vim-import-js', { 'do': 'npm install -g import-js', 'for': 'javascript' }
 Plug 'jreybert/vimagit'
+Plug 'miyakogi/seiya.vim'
 
 call plug#end()
 "}}}
@@ -374,6 +375,9 @@ let g:javascript_plugin_jsdoc = 1                                               
 let g:magit_default_show_all_files = 0                                          "Fold all files in diff by default when opened
 
 let g:tmux_navigator_disable_when_zoomed = 1                                    "Disable tmux navigation on fullscreen
+
+let g:seiya_auto_enable = 1
+let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 
 " }}}
 " vim:foldenable:foldmethod=marker
