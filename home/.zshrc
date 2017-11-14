@@ -9,4 +9,4 @@ export ZSH_HOME=$HOME/.zsh
 # Load a general configuration of zsh
 [ -f $ZSH_HOME/general.zshrc ] && source $ZSH_HOME/general.zshrc
 
-[ -z "$TMUX" ] && exec tmux
+[ -z "$TMUX" ] && exec tmux new-session -A -s tmux-session

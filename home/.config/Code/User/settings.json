@@ -1,4 +1,6 @@
 {
     "vim.enableNeovim": true,
-    "vim.disableAnnoyingNeovimMessage": true
+    "vim.disableAnnoyingNeovimMessage": true,
+
+    "C_Cpp.intelliSenseEngine": "Default"
 }

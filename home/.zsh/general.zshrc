@@ -11,6 +11,11 @@
   # Add things from Cargo/Rust
   source $HOME/.cargo/env
 
+  # Add things for NodeJS
+  [ -d $HOME/.node/bin ] && export PATH="$HOME/.node/bin:$PATH"
+  export NODEPATH="$HOME/.node/lib/node_modules:$NODE_PATH"
+  export MANPATH="$HOME/.node/share/man:$MANPATH"
+
   # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 #  export LANG="ko_KR.UTF-8"
