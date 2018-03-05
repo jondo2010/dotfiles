@@ -1,12 +1,36 @@
-# .zshrc
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
 
-# Set the path of zsh configuration directory
-export ZSH_HOME=$HOME/.zsh
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
-# Load a configuration of oh-my-zsh
-[ -f $ZSH_HOME/oh-my-zsh.zshrc ] && source $ZSH_HOME/oh-my-zsh.zshrc
+# Customize to your needs...
 
-# Load a general configuration of zsh
-[ -f $ZSH_HOME/general.zshrc ] && source $ZSH_HOME/general.zshrc
+# Load alias list
+if [[ -s "${ZDOTDIR:-$HOME}/.alias" ]]; then
+    source "${ZDOTDIR:-$HOME}/.alias"
+fi
 
-[ -z "$TMUX" ] && exec tmux new-session -A -s tmux-session
+# Disable autocorrect guesses. Happens when typing a wrong
+# command that may look like an existing one.
+unsetopt CORRECT
+
+# Turn off shared history
+unsetopt share_history
+setopt no_share_history
+
+# This bunch of code displays red dots when autocompleting
+expand-or-complete-with-dots() {
+    # a command with the tab key, "Oh-my-zsh"-style.
+    echo -n "\e[31m......\e[0m"
+    zle expand-or-complete
+    zle redisplay
+}
+zle -N expand-or-complete-with-dots
+bindkey "^I" expand-or-complete-with-dots
