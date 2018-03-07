@@ -28,9 +28,17 @@ setopt no_share_history
 # This bunch of code displays red dots when autocompleting
 expand-or-complete-with-dots() {
     # a command with the tab key, "Oh-my-zsh"-style.
-    echo -n "\e[31m......\e[0m"
+    echo -n "\e[31m...\e[0m"
     zle expand-or-complete
     zle redisplay
 }
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
+
+# Add some additional missing key bindings
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+# Speed up transition between VI modes
+export KEYTIMEOUT=1
+

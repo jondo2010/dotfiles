@@ -16,13 +16,13 @@
 zstyle ':prezto:*:*' color 'yes'
 
 # Add additional directories to load prezto modules from
-# zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
+#zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 
 # Set the Zsh modules to load (man zshmodules).
-# zstyle ':prezto:load' zmodule 'attr' 'stat'
+#zstyle ':prezto:load' zmodule 'attr' 'stat'
 
 # Set the Zsh functions to load (man zshcontrib).
-# zstyle ':prezto:load' zfunction 'zargs' 'zmv'
+#zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
@@ -35,11 +35,14 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'archive' \
+  'syntax-highlighting' \
   'prompt' \
-  'history-substring-search' \
   'git' \
-  'tmux' \
-  'docker'
+  'helper' \
+  'history-substring-search' \
+  'tmux'
+  #'docker'
 
 #
 # Autosuggestions
@@ -73,6 +76,9 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
 # zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
+# Skip aliases
+zstyle ':prezto:module:git:alias' skip 'yes'
+
 #
 # GNU Utility
 #
@@ -83,6 +89,9 @@ zstyle ':prezto:module:gnu-utility' prefix 'g'
 #
 # History Substring Search
 #
+
+# Enable highlighting
+zstyle ':prezto:module:history-substring-search' color 'yes'
 
 # Set the query found color.
 # zstyle ':prezto:module:history-substring-search:color' found ''

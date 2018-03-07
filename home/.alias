@@ -11,7 +11,7 @@ alias weechat="weechat-curses"
 # Convert JSON to pretty-print JSON
 alias prettyjson="python -m json.tool"
 
-alias ls='ls -GpF --color=auto'
+#alias ls='ls -GpF --color=auto'
 
 # Use nvim instead of vim
 alias vim="nvim"
