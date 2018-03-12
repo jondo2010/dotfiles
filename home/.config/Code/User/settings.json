@@ -1,6 +1,38 @@
 {
     "vim.enableNeovim": true,
-    "vim.disableAnnoyingNeovimMessage": true,
+    //"vim.disableAnnoyingNeovimMessage": true,
+    "vim.autoindent": true,
 
-    "C_Cpp.intelliSenseEngine": "Default"
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+
+    "rust-client.channel": "nightly-2017-10-24",
+    //"rust-client.channel": "nightly",
+    "rust.all_features": true,
+    "rust.workspace_mode": true,
+
+    "python.disablePromptForFeatures": [
+        "pylint"
+    ],
+
+    "cmake.preferredGenerators": [
+        "Unix Makefiles",
+        "Ninja"
+    ],
+    "files.associations": {
+        ".dazelrc": "python"
+    },
+
+    "search.followSymlinks": false,
+
+    //"extensions.autoUpdate": false,
+    "explorer.confirmDragAndDrop": false
 }
