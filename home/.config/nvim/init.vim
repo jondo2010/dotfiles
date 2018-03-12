@@ -9,7 +9,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' }
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
 "Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'scrooloose/nerdtree'
@@ -18,7 +18,7 @@ Plug 'duff/vim-bufonly'
 "Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'Shougo/deoplete.nvim'
+"Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
 Plug 'dyng/ctrlsf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -26,6 +26,12 @@ Plug 'vimwiki/vimwiki'
 "Plug 'galooshi/vim-import-js', { 'do': 'npm install -g import-js', 'for': 'javascript' }
 Plug 'jreybert/vimagit'
 Plug 'miyakogi/seiya.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }                                                                         "LSP client plugin
+Plug 'junegunn/fzf'                                                             "(Optional) Multi-entry selection UI.
+Plug 'roxma/nvim-completion-manager'
 
 call plug#end()
 "}}}
@@ -359,11 +365,11 @@ let g:NERDTreeShowHidden = 1                                                    
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
 let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
 
-let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
-let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
-let g:deoplete#tag#cache_limit_size = 10000000                                  "Allow tags file up to ~10 MB
+"let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
+"let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
+"let g:deoplete#tag#cache_limit_size = 10000000                                  "Allow tags file up to ~10 MB
 
-let g:delimitMate_expand_cr = 1                                                 "auto indent on enter
+"let g:delimitMate_expand_cr = 1                                                 "auto indent on enter
 
 let g:ale_linters = {'javascript': ['eslint']}                                  "Lint js with eslint
 let g:ale_fixers = {'javascript': ['prettier', 'eslint']}                       "Fix eslint errors
@@ -384,6 +390,16 @@ let g:tmux_navigator_disable_when_zoomed = 1                                    
 
 let g:seiya_auto_enable = 1
 let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> <F3> :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " }}}
 " vim:foldenable:foldmethod=marker
