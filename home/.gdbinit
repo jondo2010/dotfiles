@@ -1,6 +1,10 @@
 # .gdbinit
-#
-# Maintained by Claud D. Park <posquit0.bj@gmail.com>
-# http://www.posquit0.com/
 
-source ~/.tools/gef/gef.py
+python
+import sys;
+sys.path.insert(0, '/usr/share/gcc-8/python');
+from libstdcxx.v6.printers import register_libstdcxx_printers;
+register_libstdcxx_printers(None)
+end
+
+#source ~/.tools/gef/gef.py

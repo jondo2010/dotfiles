@@ -7,18 +7,17 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'w0rp/ale', { 'do': 'npm install -g prettier' }
+Plug 'w0rp/ale'
 Plug 'nelstrom/vim-visual-star-search'
 "Plug 'Raimondi/delimitMate'
 "Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
-"Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'duff/vim-bufonly'
 "Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'kristijanhusak/vim-hybrid-material'
-"Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'dyng/ctrlsf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -26,12 +25,13 @@ Plug 'vimwiki/vimwiki'
 "Plug 'galooshi/vim-import-js', { 'do': 'npm install -g import-js', 'for': 'javascript' }
 Plug 'jreybert/vimagit'
 Plug 'miyakogi/seiya.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }                                                                         "LSP client plugin
+
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }         "LSP client plugin
+
 Plug 'junegunn/fzf'                                                             "(Optional) Multi-entry selection UI.
 Plug 'roxma/nvim-completion-manager'
+
+Plug 'vim-airline/vim-airline'                                                  "VIM airline
 
 call plug#end()
 "}}}
@@ -128,7 +128,7 @@ autocmd vimrc FileType php setlocal sw=4 sts=4 ts=4                             
 " }}}
 " ================ Completion ======================= {{{
 
-set wildmode=list:full
+set wildmode=list:longest,full
 set wildignore=*.o,*.obj,*~                                                     "stuff to ignore when tab completing
 set wildignore+=*.git*
 set wildignore+=*.meteor*
@@ -153,21 +153,21 @@ set sidescroll=5
 " }}}
 " ================ Statusline ======================== {{{
 
-hi User1 guifg=#FF0000 guibg=#455A64
-set statusline=\ %{toupper(mode())}                                             "Mode
-set statusline+=\ \│\ %{fugitive#head()}                                        "Git branch
-set statusline+=\ \│\ %4F                                                       "File path
-set statusline+=\ %1*%m%*                                                       "Modified indicator
-set statusline+=\ %w                                                            "Preview indicator
-set statusline+=\ %r                                                            "Read only indicator
-set statusline+=\ %q                                                            "Quickfix list indicator
-set statusline+=\ %=                                                            "Start right side layout
-set statusline+=\ %{&enc}                                                       "Encoding
-set statusline+=\ \│\ %y                                                        "Filetype
-set statusline+=\ \│\ %p%%                                                      "Percentage
-set statusline+=\ \│\ %l/%L                                                     "Current line number/Total line numbers
-set statusline+=\ \│\ %c                                                        "Column number
-set statusline+=\ \│%1*%{ALEGetStatusLine()}%*                                  "Errors count
+"hi User1 guifg=#FF0000 guibg=#455A64
+"set statusline=\ %{toupper(mode())}                                             "Mode
+"set statusline+=\ \│\ %{fugitive#head()}                                        "Git branch
+"set statusline+=\ \│\ %4F                                                       "File path
+"set statusline+=\ %1*%m%*                                                       "Modified indicator
+"set statusline+=\ %w                                                            "Preview indicator
+"set statusline+=\ %r                                                            "Read only indicator
+"set statusline+=\ %q                                                            "Quickfix list indicator
+"set statusline+=\ %=                                                            "Start right side layout
+"set statusline+=\ %{&enc}                                                       "Encoding
+"set statusline+=\ \│\ %y                                                        "Filetype
+"set statusline+=\ \│\ %p%%                                                      "Percentage
+"set statusline+=\ \│\ %l/%L                                                     "Current line number/Total line numbers
+"set statusline+=\ \│\ %c                                                        "Column number
+"set statusline+=\ \│%1*%{ALEGetStatusLine()}%*                                  "Errors count
 
 "}}}
 " ================ Abbreviations ==================== {{{
@@ -240,8 +240,14 @@ nnoremap k gk
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \ : pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " If popup window is visible do autocompletion from back
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " Fix for jumping over placeholders for neosnippet
 smap <expr><TAB> neosnippet#jumpable() ?
 \ "\<Plug>(neosnippet_jump)"
@@ -280,9 +286,9 @@ nnoremap <Leader>e :lopen<CR>
 nnoremap <Leader>q :lclose<CR>
 
 " Find current file in NERDTree
-nnoremap <Leader>hf :NERDTreeFind<CR>
+"nnoremap <Leader>hf :NERDTreeFind<CR>
 " Open NERDTree
-nnoremap <Leader>n :NERDTreeToggle<CR>
+"nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " Toggle between last 2 buffers
 nnoremap <leader><tab> <c-^>
@@ -358,16 +364,12 @@ let g:gitgutter_eager = 0                                                       
 
 let g:user_emmet_leader_key = '<c-e>'                                           "Change trigger emmet key
 
-let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
-let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
-let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
-
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
 let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
 
-"let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
-"let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
-"let g:deoplete#tag#cache_limit_size = 10000000                                  "Allow tags file up to ~10 MB
+let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
+let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
+let g:deoplete#tag#cache_limit_size = 10000000                                  "Allow tags file up to ~10 MB
 
 "let g:delimitMate_expand_cr = 1                                                 "auto indent on enter
 
@@ -392,11 +394,18 @@ let g:seiya_auto_enable = 1
 let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 
 let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['~/.local/bin/cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"~/.cache/cquery"}'],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ }
+let g:LanguageClient_autoStart = 1                                              " Automatically start language servers.
 
+let g:airline#extensions#tabline#enabled = 1                                    " Automatically displays all buffers when there's only one tab open.
+let g:airline#extensions#ale#enabled = 1                                        " Integrate with ALE
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Maps K to hover, F3 to goto definition, F2 to rename
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <F3> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>

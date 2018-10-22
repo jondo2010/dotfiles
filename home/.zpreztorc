@@ -42,6 +42,8 @@ zstyle ':prezto:load' pmodule \
   'helper' \
   'history-substring-search' \
   'tmux' \
+  'dpkg' \
+  'python' \
   'autosuggestions'
   #'docker'
 
