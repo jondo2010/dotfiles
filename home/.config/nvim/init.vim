@@ -9,29 +9,27 @@ Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'w0rp/ale'
 Plug 'nelstrom/vim-visual-star-search'
-"Plug 'Raimondi/delimitMate'
-"Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
-"Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'duff/vim-bufonly'
-"Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet'
 Plug 'dyng/ctrlsf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vimwiki/vimwiki'
-"Plug 'galooshi/vim-import-js', { 'do': 'npm install -g import-js', 'for': 'javascript' }
 Plug 'jreybert/vimagit'
 Plug 'miyakogi/seiya.vim'
-
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }         "LSP client plugin
+Plug 'moll/vim-bbye'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh', }
 
 Plug 'junegunn/fzf'                                                             "(Optional) Multi-entry selection UI.
-Plug 'roxma/nvim-completion-manager'
+"Plug 'roxma/nvim-completion-manager'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet'
 
 Plug 'vim-airline/vim-airline'                                                  "VIM airline
+
+Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 "}}}
@@ -236,6 +234,12 @@ nnoremap <Leader>v <C-w>v
 nnoremap j gj
 nnoremap k gk
 
+" LanguageClient mappings
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>                            " F5 to contextMenu
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>               " K to hover
+nnoremap <silent> <F3> :call LanguageClient_textDocument_definition()<CR>       " F3 to goto definition
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>           " F2 to rename
+
 " Expand snippets on tab if snippets exists, otherwise do autocompletion
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -275,20 +279,21 @@ vnoremap y y`]
 vnoremap p p`]
 
 " Move selected lines up and down
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+"vnoremap J :m '>+1<CR>gv=gv
+"vnoremap K :m '<-2<CR>gv=gv
 
 " Clear search highlight
 nnoremap <Leader><space> :noh<CR>
 
 " Handle syntastic error window
-nnoremap <Leader>e :lopen<CR>
-nnoremap <Leader>q :lclose<CR>
+"nnoremap <Leader>e :lopen<CR>
+"nnoremap <Leader>q :lclose<CR>
+nnoremap <Leader>q :Bdelete<CR>
 
 " Find current file in NERDTree
-"nnoremap <Leader>hf :NERDTreeFind<CR>
+nnoremap <Leader>hf :NERDTreeFind<CR>
 " Open NERDTree
-"nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " Toggle between last 2 buffers
 nnoremap <leader><tab> <c-^>
@@ -305,12 +310,12 @@ nnoremap <Leader>t :CtrlPBufTag<CR>
 nnoremap <Leader>m :CtrlPMRU<CR>
 
 " Maps for indentation in normal mode
-nnoremap <tab> >>
-nnoremap <s-tab> <<
+"nnoremap <tab> >>
+"nnoremap <s-tab> <<
 
 " Indenting in visual mode
-xnoremap <s-tab> <gv
-xnoremap <tab> >gv
+"xnoremap <s-tab> <gv
+"xnoremap <tab> >gv
 
 " Resize window with shift + and shift -
 nnoremap + <c-w>5>
@@ -338,6 +343,13 @@ nnoremap <Leader>] <C-W>v<C-]>
 
 " Reformat and fix linting errors
 nnoremap <Leader>s :ALEFix<CR>
+
+" Clang-format with <Leader>F in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>F :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>F :ClangFormat<CR>
+
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
 
 " }}}
 " ================ Plugins setups ======================== {{{
@@ -394,7 +406,11 @@ let g:seiya_auto_enable = 1
 let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['~/.local/bin/cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"~/.cache/cquery"}'],
+    \ 'cpp': [
+    \    '~/.local/bin/cquery',
+    \    '--log-file=/tmp/cquery.log',
+    \    '--init={"cacheDirectory":"/home/john/.cache/cquery"}'
+    \ ],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
@@ -404,11 +420,7 @@ let g:LanguageClient_autoStart = 1                                              
 let g:airline#extensions#tabline#enabled = 1                                    " Automatically displays all buffers when there's only one tab open.
 let g:airline#extensions#ale#enabled = 1                                        " Integrate with ALE
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Maps K to hover, F3 to goto definition, F2 to rename
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> <F3> :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+let g:clang_format#detect_style_file = 1                                        " Use .clang-format
 
 " }}}
 " vim:foldenable:foldmethod=marker
