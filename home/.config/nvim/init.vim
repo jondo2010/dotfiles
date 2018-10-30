@@ -22,7 +22,10 @@ Plug 'miyakogi/seiya.vim'
 Plug 'moll/vim-bbye'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh', }
 
-Plug 'junegunn/fzf'                                                             "(Optional) Multi-entry selection UI.
+" Multi-entry selection UI. FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 "Plug 'roxma/nvim-completion-manager'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
@@ -30,6 +33,8 @@ Plug 'Shougo/neosnippet'
 Plug 'vim-airline/vim-airline'                                                  "VIM airline
 
 Plug 'rhysd/vim-clang-format'
+
+Plug 'sakhnik/nvim-gdb'
 
 call plug#end()
 "}}}
@@ -409,7 +414,7 @@ let g:LanguageClient_serverCommands = {
     \ 'cpp': [
     \    '~/.local/bin/cquery',
     \    '--log-file=/tmp/cquery.log',
-    \    '--init={"cacheDirectory":"/home/john/.cache/cquery"}'
+    \    '--init={"cacheDirectory":".cquery_cache"}'
     \ ],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'javascript': ['javascript-typescript-stdio'],

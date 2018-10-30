@@ -42,3 +42,8 @@ bindkey '^r' history-incremental-search-backward
 # Speed up transition between VI modes
 export KEYTIMEOUT=1
 
+autoload bashcompinit
+bashcompinit
+source /etc/bash_completion.d/bazel
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
