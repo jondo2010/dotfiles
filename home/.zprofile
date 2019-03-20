@@ -25,9 +25,11 @@ export PAGER='less'
 # Language
 #
 
-if [[ -z "$LANG" ]]; then
+#if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
-fi
+#fi
+
+export LC_ALL='en_US.UTF-8'
 
 #
 # Paths

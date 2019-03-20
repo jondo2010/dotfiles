@@ -1,5 +1,5 @@
 " ================ Plugins ==================== {{{
-call plug#begin( '~/.config/nvim/bundle')
+call plug#begin('~/.config/nvim/bundle')
 
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'

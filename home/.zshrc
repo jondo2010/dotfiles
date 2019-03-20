@@ -44,6 +44,7 @@ export KEYTIMEOUT=1
 
 autoload bashcompinit
 bashcompinit
-source /etc/bash_completion.d/bazel
+
+[ -f ~/.fzf.zsh ] && source /etc/bash_completion.d/bazel
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
