@@ -2,3 +2,4 @@
 .config/Code
 .ssh
 .tmux
+.config/fontconfig/conf.d
