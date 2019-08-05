@@ -48,3 +48,6 @@ bashcompinit
 [ -f ~/.fzf.zsh ] && source /etc/bash_completion.d/bazel
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
