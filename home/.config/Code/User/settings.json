@@ -2,6 +2,7 @@
     "vim.enableNeovim": true,
     //"vim.disableAnnoyingNeovimMessage": true,
     "vim.autoindent": true,
+    "vim.neovimPath": "/usr/bin/nvim",
 
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
@@ -14,10 +15,7 @@
         "suppressWelcomeNotice": true
     },
 
-    "rust-client.channel": "nightly-2017-10-24",
-    //"rust-client.channel": "nightly",
-    "rust.all_features": true,
-    "rust.workspace_mode": true,
+    "rust-client.channel": "nightly",
 
     "python.disablePromptForFeatures": [
         "pylint"
@@ -34,5 +32,8 @@
     "search.followSymlinks": false,
 
     //"extensions.autoUpdate": false,
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 2,
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "C_Cpp.updateChannel": "Insiders",
 }
