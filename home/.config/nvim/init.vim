@@ -385,7 +385,7 @@ let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           
 let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
 
 let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
-let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
+"let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
 let g:deoplete#tag#cache_limit_size = 10000000                                  "Allow tags file up to ~10 MB
 
 "let g:delimitMate_expand_cr = 1                                                 "auto indent on enter

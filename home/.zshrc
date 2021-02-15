@@ -45,9 +45,15 @@ export KEYTIMEOUT=1
 autoload bashcompinit
 bashcompinit
 
-[ -f ~/.fzf.zsh ] && source /etc/bash_completion.d/bazel
+#[ -f ~/.fzf.zsh ] && source /etc/bash_completion.d/bazel
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Hook for desk activation
 [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
+
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+if [[ -f $HOME/.cargo ]] source $HOME/.cargo/env
+

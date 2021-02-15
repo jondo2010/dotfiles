@@ -18,7 +18,7 @@
     untracked = cyan
 [user]
     name = John Hughes
-    email = john.hughes@aid-driving.eu
+    email = jondo2010@gmail.com
 [apply]
     whitespace = nowarn
 [core]
@@ -41,6 +41,7 @@
     #show = vim -c '%sm/\\e.\\{-}m//g' -c 'set ft=diff' +1 -
 [merge]
 	tool = kdiff3
+	renameLimit = 2600
 [diff]
 	tool = kdiff3
 [difftool "sourcetree"]
@@ -58,7 +59,3 @@
 [credential]
         helper = !pass-git-helper $@
 
-[http "https://atlassian.aid-driving.eu:9443/"]
-    sslVerify = true
-    sslCert = ~/.ssh/aid_cert.pem
-    sslKey  = ~/.ssh/aid_key.pem
