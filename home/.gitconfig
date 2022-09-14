@@ -25,6 +25,7 @@
     editor = vim
     preloadindex = true
     fscache = true
+    pager = delta
 [gc]
     auto = 256
 [rerere]
@@ -42,8 +43,10 @@
 [merge]
 	tool = kdiff3
 	renameLimit = 2600
+	conflictstyle = diff3
 [diff]
 	tool = kdiff3
+	colorMoved = default
 [difftool "sourcetree"]
 	cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
 [mergetool "sourcetree"]
@@ -59,3 +62,10 @@
 [credential]
         helper = !pass-git-helper $@
 
+[interactive]
+	diffFilter = dela --color-only
+[add.interactive]
+	useBuiltin = false
+[delta]
+	navigate = true
+	light = false
